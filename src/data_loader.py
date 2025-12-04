@@ -5,6 +5,7 @@ import config
 
 # Data augmentation for training and evaluation
 def get_transforms():
+    #Image tranformations to reduce overfitting and improve generalization
     train_transform = transforms.Compose([
         transforms.RandomResizedCrop(224, scale=(0.9, 1.0), ratio=(0.95, 1.05)),
         transforms.RandomHorizontalFlip(p=0.5),
