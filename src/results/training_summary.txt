@@ -1,0 +1,12 @@
+Best Val Accuracy: 68.83%
+Test Accuracy: 71.62%
+Test F1: 0.7149
+
+not_overgripping:
+  Precision: 0.7500
+  Recall: 0.6486
+  F1: 0.6957
+overgripping:
+  Precision: 0.6905
+  Recall: 0.7838
+  F1: 0.7342
