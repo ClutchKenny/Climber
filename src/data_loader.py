@@ -3,12 +3,13 @@ from torch.utils.data import DataLoader
 from torchvision import datasets, transforms
 import config
 
-
+# Data augmentation for training and evaluation
 def get_transforms():
     train_transform = transforms.Compose([
         transforms.RandomResizedCrop(224, scale=(0.8, 1.0), ratio=(0.9, 1.1)),
         transforms.RandomHorizontalFlip(p=0.5),
-        transforms.RandomRotation(degrees=10),
+        transforms.RandomRotation(degrees=15),
+        transforms.RandomAffine(degrees=0, translate=(0.05, 0.05), scale=(0.95, 1.05)),
         transforms.ColorJitter(brightness=0.2, contrast=0.2, saturation=0.2, hue=0.05),
         transforms.RandomPerspective(distortion_scale=0.2, p=0.5),
         transforms.ToTensor(),
@@ -25,6 +26,7 @@ def get_transforms():
     
     return train_transform, val_test_transform
 
+# Create dataloaders for the train, validation, and test splits
 def create_dataloaders(train_dir, val_dir, test_dir, batch_size, num_workers):
     train_transform, val_test_transform = get_transforms()
     

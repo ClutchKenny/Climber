@@ -2,7 +2,7 @@ import os
 
 # Training settings
 BATCH_SIZE = 16
-NUM_EPOCHS = 10
+NUM_EPOCHS = 20
 HEAD_LR = 1e-3
 BACKBONE_LR = 1e-4
 WEIGHT_DECAY = 1e-4

@@ -7,7 +7,7 @@ import numpy as np
 import config
 from plotting import plot_confusion_matrix
 
-
+# Run the model on test set and output results
 def evaluate_test(model, test_loader, class_names, device):
     model.eval()
     all_preds = []

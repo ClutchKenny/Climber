@@ -1,7 +1,7 @@
 import torch.nn as nn
 from torchvision import models
 
-
+# ResNet18 based classifier for overgripping vs not overgripping
 def create_model(num_classes, device):
     model = models.resnet18(weights="IMAGENET1K_V1")
 
@@ -9,9 +9,9 @@ def create_model(num_classes, device):
     for param in model.parameters():
         param.requires_grad = False
 
-    # Unfreeze last residual block
+    # Unfreeze layers 3 and 4
     for name, param in model.named_parameters():
-        if name.startswith("layer4."):
+        if name.startswith("layer3.") or name.startswith("layer4."):
             param.requires_grad = True
 
     # Replace classifier head with larger dropout head

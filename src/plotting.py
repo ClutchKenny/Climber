@@ -7,7 +7,7 @@ from torch.utils.data import DataLoader
 import os
 import config
 
-
+# Plot loss and accuracy curves for training and validation
 def plot_training_curves(history, save_path):
     epochs = range(1, len(history['train_loss']) + 1)
     
@@ -33,7 +33,7 @@ def plot_training_curves(history, save_path):
     plt.savefig(save_path, dpi=150, bbox_inches='tight')
     plt.close()
 
-
+# Plot confusion matrix
 def plot_confusion_matrix(cm, class_names, save_path):
     plt.figure(figsize=(8, 6))
     sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', 
@@ -45,7 +45,7 @@ def plot_confusion_matrix(cm, class_names, save_path):
     plt.savefig(save_path, dpi=150, bbox_inches='tight')
     plt.close()
 
-
+# Plot sample predictions from model
 def visualize_sample_predictions(model, test_loader, class_names, device, num_samples=12, save_path=None):
     model.eval()
     
@@ -95,31 +95,5 @@ def visualize_sample_predictions(model, test_loader, class_names, device, num_sa
     
     if save_path is None:
         save_path = os.path.join(config.FIGURES_DIR, "sample_predictions.png")
-    plt.savefig(save_path, dpi=150, bbox_inches='tight')
-    plt.close()
-
-
-def plot_dataset_distribution(stats, save_path):
-    splits = list(stats.keys())
-    class_names = list(stats[splits[0]].keys())
-    
-    fig, ax = plt.subplots(figsize=(8, 5))
-    
-    x = np.arange(len(class_names))
-    width = 0.25
-    
-    for i, split in enumerate(splits):
-        counts = [stats[split].get(cls, 0) for cls in class_names]
-        ax.bar(x + i * width, counts, width, label=split.capitalize(), alpha=0.8)
-    
-    ax.set_xlabel('Class')
-    ax.set_ylabel('Number of Images')
-    ax.set_title('Dataset Distribution')
-    ax.set_xticks(x + width)
-    ax.set_xticklabels(class_names)
-    ax.legend()
-    ax.grid(True, alpha=0.3, axis='y')
-    
-    plt.tight_layout()
     plt.savefig(save_path, dpi=150, bbox_inches='tight')
     plt.close()
